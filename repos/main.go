@@ -6,7 +6,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/alecthomas/template"
+	"text/template"
+
 	"github.com/google/go-github/github"
 	"golang.org/x/oauth2"
 )

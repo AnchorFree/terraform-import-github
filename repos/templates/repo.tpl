@@ -1,21 +1,21 @@
 resource "github_repository" "{{ .Name }}" {
     name        = "{{ .Name }}"
     private     = "{{ .Private }}"
-    {{ if .Description }}
+    {{ if .Description -}}
     description = "{{ .Description }}"
-    {{ end }}
+    {{ end -}}
     has_wiki    = "{{ .HasWiki }}"
     has_downloads = "{{ .HasDownloads }}"
     has_issues  = "{{ .HasIssues }}"
     has_projects  = "{{ .HasProjects }}"
-    {{ if .Homepage }}
+    {{ if .Homepage -}}
     homepage_url = "{{ .Homepage }}"
-    {{ end }}
+    {{ end -}}
     allow_merge_commit  = "{{ .AllowMergeCommit }}"
     allow_squash_merge  = "{{ .AllowSquashMerge }}"
     allow_rebase_merge  = "{{ .AllowRebaseMerge }}"
-    {{ if .Topics }}
+    {{ if .Topics -}}
     topics = [{{ range .Topics }} "{{.}}", {{end}}]
-    {{ end }}
+    {{ end -}}
     archived = "{{ .Archived }}"
 }
