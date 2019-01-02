@@ -36,6 +36,8 @@ resource "github_repository" "{{ .Name }}" {
 }
 ```
 
+You may want to have a reference to GitHub (Repository)[https://godoc.org/github.com/google/go-github/github#Repository] for further extension of the template
+
 After that you may need to run following command:
 
 ```
