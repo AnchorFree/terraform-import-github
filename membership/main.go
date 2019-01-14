@@ -22,6 +22,7 @@ func main() {
 	publicOnly := flag.Bool("public-only", false, "list only publicly visible members, ignored if role is collaborator")
 	filter := flag.String("filter", "all", "Filter members returned in the list: 2fa_disabled, all")
 	role := flag.String("role", "all", "filters members by their role in organisation: all, admin, member, collaborator")
+	fast := flag.Bool("fast", false, "Retrieve all information on the user")
 
 	flag.Parse()
 
@@ -69,8 +70,17 @@ func main() {
 	}
 
 	t := template.Must(template.ParseFiles(*tPath))
+	var user *github.User
 	for i := range allMembers {
-		err := t.Execute(os.Stdout, allMembers[i])
+		if *fast {
+			user = allMembers[i]
+		} else {
+			user, _, err = client.Users.Get(ctx, *allMembers[i].Login)
+			if err != nil {
+				panic(err)
+			}
+		}
+		err := t.Execute(os.Stdout, user)
 		if err != nil {
 			panic(err)
 		}
